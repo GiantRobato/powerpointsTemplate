@@ -8,11 +8,15 @@ all: createSlideShow.exe
 clean:
 		rm -f *.o tests/*.o createSlideShow.exe bin/*.exe obj/*.o
 
-tests: bin/testFileIO.exe bin/testHTML.exe bin/testWriteHTML.exe bin/testReformatString.exe
+tests: bin/testFileIO.exe bin/testHTML.exe bin/testWriteHTML.exe bin/testReformatString.exe bin/testGenerateHead.exe
 
 bin/testWriteHTML.exe: obj/testWriteHTML.o obj/dhtml.o
 	$(CXX) -o testWriteHTML.exe obj/testWriteHTML.o obj/dhtml.o
 	mv testWriteHTML.exe bin
+
+bin/testGenerateHead.exe: obj/testGenerateHead.o obj/dhtml.o
+	$(CXX) -o testGenerateHead.exe obj/testGenerateHead.o obj/dhtml.o
+	mv testGenerateHead.exe bin
 
 bin/testHTML.exe: obj/testHTML.o
 	$(CXX) -o testHTML.exe obj/testHTML.o
@@ -29,6 +33,10 @@ bin/testReformatString.exe: obj/testReformatString.o obj/dhtml.o
 obj/testReformatString.o: src/testReformatString.cpp 
 	$(CXX) $(CXXFLAGS) src/testReformatString.cpp
 	mv testReformatString.o obj
+
+obj/testGenerateHead.o: src/testGenerateHead.cpp 
+	$(CXX) $(CXXFLAGS) src/testGenerateHead.cpp
+	mv testGenerateHead.o obj
 
 obj/testWriteHTML.o: src/testWriteHTML.cpp 
 	$(CXX) $(CXXFLAGS) src/testWriteHTML.cpp

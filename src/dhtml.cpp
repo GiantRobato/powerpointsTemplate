@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cstring>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ string startHTML(){
 
 string addHead(){
 	string x;
-	x.append(loadFileIntoString("../data/head.data"));
+	x.append(loadFileIntoString("../data/head.html"));
 	x.append("\n");
 
 	return x;
@@ -54,6 +55,29 @@ string reformatString(string s){
 		}
 	}
 	return x;
+}
+
+string generateHead(string fname){
+	//check for title, desc., author, theme
+	ifstream input(fname.c_str());
+
+	//go through each line
+	string line;
+	while(getline(input, line)){
+
+		//copy line to c string for tokenizer
+		char in[100];
+		line.copy(in, line.length(), line.length()-1);
+		in[line.length()] = '\0';
+
+		char *token = strtok(in, " "); 	//grab first token
+		while(token != NULL){
+			cout << token << endl;
+			token = strtok(NULL, " ");
+		}
+	}	
+
+	return "H";
 }
 
 string insertCodeSlide(string fname){
